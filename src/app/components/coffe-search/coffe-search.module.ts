@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoffeSearchComponent } from './coffe-search.component';
-
-
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     CoffeSearchComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatCardModule
   ],
   exports: [
     CoffeSearchComponent
