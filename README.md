@@ -12,4 +12,7 @@ ng serve
 ng generate module components/coffe-search <br />
 ng generate component components/coffe-search
 
+# Usando componentes do angular material
+
+ng add @angular/material
 
