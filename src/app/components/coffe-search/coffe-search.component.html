@@ -18,6 +18,72 @@
             <button mat-button matStepperNext>Próximo</button>
           </div>
         </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Aroma</ng-template>
+          <mat-radio-group formControlName="aroma">
+            <mat-radio-button *ngFor="let aroma of coffeOptions.aromas" [value]="aroma">
+              {{aroma}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <div class="option-selected">Aroma selecionado: {{ coffeForm.value['aroma'] }}</div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Acidez</ng-template>
+          <mat-radio-group formControlName="acidity">
+            <mat-radio-button *ngFor="let acidity of coffeOptions.acidity" [value]="acidity">
+              {{acidity}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <div class="option-selected">Acidez selecionada: {{ coffeForm.value['acidity'] }}</div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Corpo</ng-template>
+          <mat-radio-group formControlName="body">
+            <mat-radio-button *ngFor="let body of coffeOptions.body" [value]="body">
+              {{body}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <div class="option-selected">Corpo selecionado: {{ coffeForm.value['body'] }}</div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Confirmação</ng-template>
+          <div>
+            <div>
+              <ul>
+                <li>Sabor: {{coffeForm.value['flavor']}}</li>
+                <li>Aroma: {{coffeForm.value['aroma']}}</li>
+                <li>Acidez: {{coffeForm.value['acidity']}}</li>
+                <li>Corpo: {{coffeForm.value['body']}}</li>
+              </ul>
+            </div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button (click)="confirmChoice()">Confirmar</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Resultado</ng-template>
+          <div>
+            <div>
+              Sucesso
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button (click)="reset()">Reiniciar</button>
+          </div>
+        </mat-step>
       </mat-stepper>
     </form>
   </mat-card-content>
