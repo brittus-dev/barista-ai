@@ -76,7 +76,8 @@
           <ng-template matStepLabel>Resultado</ng-template>
           <div>
             <div>
-              Sucesso
+              Carregando: {{ facade.loading$ | async }}<br />
+              {{ facade.result$ | async | json }}
             </div>
           </div>
           <div>
