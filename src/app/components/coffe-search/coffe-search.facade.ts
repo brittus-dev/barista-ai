@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, map } from "rxjs";
 import { Action } from "src/app/models/action";
@@ -27,7 +28,18 @@ export class CoffeSearchFacade {
   );
 
   //Actions
-  call(action:Action) {}
+  call(action:Action) {
+    this.stateManager.next({...this.state, loading: true})
+    action.execute().subscribe({
+      next: (result) => {
+        this.stateManager.next({...this.state, loading: false, result})
+      },
+      error: (err:HttpErrorResponse) => {
+        console.log(err);
+        this.stateManager.next({...this.state, loading: false})
+      }
+    })
+  }
 
 
 }

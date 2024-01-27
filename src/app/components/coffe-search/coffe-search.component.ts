@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CoffeOptions } from 'src/app/models/coffe-options';
+import { CoffeSearchFacade } from './coffe-search.facade';
+import { GetListCoffeAction } from './actions/get-list-coffe.action';
 
 @Component({
   selector: 'app-coffe-search',
@@ -9,13 +11,13 @@ import { CoffeOptions } from 'src/app/models/coffe-options';
 })
 export class CoffeSearchComponent {
 
-  constructor(public formBuilder:FormBuilder) { }
+  constructor(public formBuilder:FormBuilder, public facade:CoffeSearchFacade) { }
 
   @ViewChild('stepper') stepper: any;
 
   coffeOptions:CoffeOptions = new CoffeOptions();
 
-  coffeForm = this.formBuilder.group({
+  coffeForm: FormGroup = this.formBuilder.group({
     aroma: ['', [Validators.required]],
     flavor: ['', [Validators.required]],
     acidity: ['', [Validators.required]],
@@ -24,6 +26,9 @@ export class CoffeSearchComponent {
 
   confirmChoice() {
     console.log(this.coffeForm.value);
+
+    this.facade.call(new GetListCoffeAction({coffe: this.coffeForm.value}));
+
     this.stepper.next();
   }
 
