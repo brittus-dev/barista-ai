@@ -6,6 +6,7 @@ import { CoffeSearchComponent } from './coffe-search.component';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatStepperModule,
     MatRadioModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CoffeSearchComponent
