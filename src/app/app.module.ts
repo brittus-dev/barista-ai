@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoffeSearchModule } from './components/coffe-search/coffe-search.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     CoffeSearchModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

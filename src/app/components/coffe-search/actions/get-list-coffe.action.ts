@@ -3,28 +3,22 @@ import { CoffeSearchActions } from "./coffe-search.action";
 import { Coffe } from "src/app/models/coffe";
 import { delay, of, switchMap, tap, throwError, timer } from "rxjs";
 import { CoffeResult } from "src/app/models/coffe-result";
+import { OpenAIService } from "src/app/services/open-ai.service";
 
 export class GetListCoffeAction extends Action {
     override readonly type = CoffeSearchActions.GET_LIST_COFFE;
     constructor(override payload: {coffe:Coffe}) {
         super(CoffeSearchActions.GET_LIST_COFFE);
     }
-    override execute() {
-      let result:CoffeResult = {
-        cafes_especiais: [
-          {
-            nome: 'Café Especial 1',
-          },
-          {
-            nome: 'Café Especial 2',
-          },
-          {
-            nome: 'Café Especial 3',
-          }
-        ]
+    override execute(service?:OpenAIService) {
+      if (service == null) {
+        throw Error('OpenAIService indisponível')
       }
-      //return of(result).pipe(delay(2500));
-      return timer(2500)
-        .pipe(switchMap(() => throwError(() => 'Erro ao processar os dados solicitados')));
+
+      return service.callOpenAI({question: this.coffeDescription(this.payload.coffe)})
+    }
+
+    private coffeDescription(coffe:Coffe) {
+      return `Faça apenas uma lista de 5 tipos de cafés especiais com as características: Aroma ${coffe.aroma}, Acidez ${coffe.acidity}, Sabor ${coffe.flavor}, Corpo ${coffe.body}. Apenas o nome do café.`
     }
 }
