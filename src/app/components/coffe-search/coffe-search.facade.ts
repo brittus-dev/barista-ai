@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, map } from "rxjs";
 import { Action } from "src/app/models/action";
 import { CoffeResult } from "src/app/models/coffe-result";
+import { ErrorHandleService } from "src/app/services/error-handle.service";
 
 class CoffeSearchState {
   loading:boolean = false;
@@ -13,7 +14,7 @@ class CoffeSearchState {
   providedIn: 'root'
 })
 export class CoffeSearchFacade {
-  constructor() { }
+  constructor(private erroHandleService: ErrorHandleService) { }
 
   private state = new CoffeSearchState();
   private stateManager = new BehaviorSubject<CoffeSearchState>(this.state);
@@ -35,7 +36,7 @@ export class CoffeSearchFacade {
         this.stateManager.next({...this.state, loading: false, result})
       },
       error: (err:HttpErrorResponse) => {
-        console.log(err);
+        this.erroHandleService.handle('Erro ao processar os dados solicitados', err)
         this.stateManager.next({...this.state, loading: false})
       }
     })

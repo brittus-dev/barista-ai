@@ -1,7 +1,7 @@
 import { Action } from "src/app/models/action";
 import { CoffeSearchActions } from "./coffe-search.action";
 import { Coffe } from "src/app/models/coffe";
-import { delay, of } from "rxjs";
+import { delay, of, switchMap, tap, throwError, timer } from "rxjs";
 import { CoffeResult } from "src/app/models/coffe-result";
 
 export class GetListCoffeAction extends Action {
@@ -23,6 +23,8 @@ export class GetListCoffeAction extends Action {
           }
         ]
       }
-      return of(result).pipe(delay(2500));
+      //return of(result).pipe(delay(2500));
+      return timer(2500)
+        .pipe(switchMap(() => throwError(() => 'Erro ao processar os dados solicitados')));
     }
 }
