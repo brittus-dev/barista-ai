@@ -4,6 +4,7 @@ import { BehaviorSubject, map } from "rxjs";
 import { Action } from "src/app/models/action";
 import { CoffeResult } from "src/app/models/coffe-result";
 import { ErrorHandleService } from "src/app/services/error-handle.service";
+import { OpenAIService } from "src/app/services/open-ai.service";
 
 class CoffeSearchState {
   loading:boolean = false;
@@ -14,7 +15,7 @@ class CoffeSearchState {
   providedIn: 'root'
 })
 export class CoffeSearchFacade {
-  constructor(private erroHandleService: ErrorHandleService) { }
+  constructor(private erroHandleService: ErrorHandleService, private openAIService:OpenAIService) { }
 
   private state = new CoffeSearchState();
   private stateManager = new BehaviorSubject<CoffeSearchState>(this.state);
@@ -31,7 +32,7 @@ export class CoffeSearchFacade {
   //Actions
   call(action:Action) {
     this.stateManager.next({...this.state, loading: true})
-    action.execute().subscribe({
+    action.execute(this.openAIService).subscribe({
       next: (result) => {
         this.stateManager.next({...this.state, loading: false, result})
       },
