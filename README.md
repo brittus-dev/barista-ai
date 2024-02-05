@@ -7,4 +7,12 @@ Aplicação web para consulta de cafés especiais. Baseia-se nas escolhas relaci
 npm install (Se for a primeira vez ou a pasta não existir) <br />
 ng serve
 
+# Criando componentes e módulos
+
+ng generate module components/coffe-search <br />
+ng generate component components/coffe-search
+
+# Usando componentes do angular material
+
+ng add @angular/material
 
